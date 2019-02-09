@@ -9,7 +9,7 @@ public class Grayscale{
         File f = null;
 
         try{
-            f = new File(); //put in file path
+            f = new File(); //put in file path eg D:\\Image\\example.jpg
             img = ImageIO.read(f);
         }catch(IOException e){
             System.out.println(e);
@@ -36,7 +36,7 @@ public class Grayscale{
         }
         //write image
         try{
-            f = new File();//enter file path here
+            f = new File();//enter file path here eg D:\\Image\\example.svg
             ImageIO.write(img, "svg", f);
         }catch(IOException e){
             System.out.println(e);
