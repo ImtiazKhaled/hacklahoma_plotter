@@ -31,11 +31,19 @@ public class Grayscale{
 
                 int avg = (r+g+b)/3;
                 p = (a<<24) | (avg<<16) | (avg<<8) | avg;
-                img.setRGB()
+                 img.setRGB(x, y, p);
             }
         }
-
-
+        //write image
+        try{
+            f = new File();//enter file path here
+            ImageIO.write(img, "svg", f);
+        }catch(IOException e){
+            System.out.println(e);
+        }
+        
+    } //main() ends here
+}
 
         
         }
