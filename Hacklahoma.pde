@@ -1,5 +1,6 @@
 import geomerative.*;
-
+import processing.serial.*;
+Serial myPort;
 RShape grp;
 RPoint[][] pointPaths;
 
@@ -22,7 +23,7 @@ float z = 0;
 
 boolean ignoringStyles = false;
 int filesaved = 0;
-
+int k=0;
 void setup(){
   size(600, 600, P3D);
   // VERY IMPORTANT: Allways initialize the library before using it
@@ -53,6 +54,9 @@ void setup(){
   background(0);
   stroke(255);
   noFill();
+  
+  String portName = Serial.list()[0];
+  myPort = new Serial(this,portName,9600);
   
  if( filesaved == 0){
   for(int i = 0; i<pointPaths.length; i++){
@@ -85,24 +89,48 @@ lines = loadStrings(fileName+".txt");
   //println(lines.length);
   for (int i=2; i<lines.length-1; i++) {
     temp=split(lines[i], ' ');
-    if(temp[1].contains("S")){
-    SaveState=true;
-    ps.add(SaveState);
-    println(temp[1]);
-    x.add(0.0);
-    y.add(0.0);
+    if(temp[1].contains("X")){
+   // SaveState=true;
+    //ps.add(SaveState);
+     x.add(float(temp[1].substring(1)));
+    y.add(float(temp[2].substring(1)));
     }else{
-    SaveState=false;
-    ps.add(SaveState);
-    println(temp[1]);
-    x.add(float(temp[1].substring(1)));
-    y.add(float(temp[2].substring(1))); 
+    if(temp[1].contains("2")){
+      ps.add(true);
+    }else{
+    ps.add(false);
+    }
     }
 }
-
+println(x);
+println(y);
+println(ps);
 }
-
-void draw(){  
+String tempStr;
+char transmit;
+void draw(){
+  /*if(ps.get(k)==true){
+  myPort.write('T');  //send a 1
+   println("T");
+  }else if(ps.get(k)==false){
+     myPort.write('F');         //send a 0
+   println("F"); 
+  }
+   delay(2000);
+   if(k>4){
+     k=0;
+   }else{
+     k++;
+   }
+   */
+tempStr="X" + str(x.get(k)) + "Y" + str(y.get(k)) + "E";
+for(int i=0; i<tempStr.length();i++){
+transmit=tempStr.charAt(i);
+myPort.write(transmit);
+}
+println(tempStr);
+  delay(1000);
+  k++;
 }
 
 void mousePressed(){
