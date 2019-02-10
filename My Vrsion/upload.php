@@ -30,7 +30,7 @@ if (($extension != '') &&
 # Search for a unique filename by adding a number to the
 # stem (first we try without, of course)
 $suffix = '';
-while (file_exists("$finalDir/$stem$suffix$extension")) {
+while (file_exists("C:/Potrace/$stem$suffix$extension")) {
   if ($suffix == '') {
     $suffix = '0';
   } else {
@@ -41,7 +41,10 @@ while (file_exists("$finalDir/$stem$suffix$extension")) {
 # Put the full name back together
 $name = "$stem$suffix$extension";
 
-move_uploaded_file($_FILES['myfile']['tmp_name'], "home/m/mi/mii1560/public_html/");
+// move_uploaded_file($_FILES['myfile']['tmp_name'], "C:\Potrace");
+
+move_uploaded_file($_FILES['myfile']['tmp_name'],
+    "C:/Potrace".'/'.basename($_FILES['myfile']['tmp_name']));
 
 // $safeExtensions = array(
 
