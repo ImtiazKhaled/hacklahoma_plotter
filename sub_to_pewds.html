@@ -1,0 +1,105 @@
+<DOCTYPE! html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Subscribe To Pewdipie</title>
+        <title>Hello World</title>
+        
+        <style type="text/css">
+            #maincontainer 
+            {   
+            top:0px;
+            padding-top:0;
+            margin:auto; position:relative;
+            width:950px;
+            height:100%;
+            }
+        </style>
+
+        <style type="text/css">
+        nav#sub{margin-top: 50px; margin-left: 472px;}
+        nav#sub > a{
+            background:crimson;
+            color:white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-family: "Arial Black", Gadget, sans-serif;
+        }
+        nav#sub > a:hover {background:darkred}
+        nav#sub > a:active {background:tomato}
+        </style>
+        
+        <style media="screen">
+          #custom_button{margin-top: 50px; margin-left: 500px;}
+          #custom_button    {
+            background:crimson;
+            color:white;
+            padding:10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-family: "Arial Black", Gadget, sans-serif;
+            }
+
+            #custom_button:hover{background:darkred}
+            #custom_button:active {background:tomato}
+        </style>
+    
+        <script src="js/script.js"></script>
+    </head>
+    <body>
+        <input type="file" id="real_file" hidden="hidden" />
+
+        <button type="button" id="custom_button"><b>Upload a Picture</b></button>
+        <span id="custom_picture"> <br></span>
+        
+        <div id="image_preview:"></div>
+        <script type="text/javascript">//Input File button script
+        const real_file_btm = document.getElementById("real_file");
+        const custom_file_btm = document.getElementById("custom_button");
+        const custom_pic_btm = document.getElementById("custom_picture");
+        
+        custom_file_btm.addEventListener("click", function(){
+            real_file_btm.click();
+        });
+
+        real_file_btm.addEventListener("change",function(){
+            if(real_file_btm.value) {
+                custom_pic_btm.innerHTML = real_file_btm.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+            }
+
+            else    {
+                custom_pic_btm.innerHTML = "No file chosen, yet.";
+            }
+        });
+        function file_validation()   {
+            var file_input = document.getElementById("real_file");
+            var file_path = file_input.value;
+            var allowed_extensions  = /(\.jpeg|\.png)$/i;
+            if(!allowed_extensions.exec(filePath))  {
+                alert('Please upload either a JPEG or PNG file');
+                file_input.value = '';
+                return false;
+            }
+            else    {
+                    //image preview
+                    if(file_input.files && file_input.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            document.getElementById("image_preview").innerHTML = '<img src = "'+e.target.result+'" />';
+                        };
+                        reader.readAsDataURL(file_input.files[0]);
+
+                        }
+                    }
+            }
+        var mega = new Audio();
+        mega.src = "mega.mp3";
+        </script>
+
+        <nav id="sub">
+            <a href="https://www.youtube.com/user/PewDiePie?sub_confirmation=1" onmouseover="mega.play()"><b>Subscribe to Pewdipie</b></a>
+        </nav>  
+    </body>   
+</html>
+</DOCTYPE>
